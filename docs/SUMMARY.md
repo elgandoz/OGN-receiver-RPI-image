@@ -1,9 +1,9 @@
 # Table of contents
 
 * [OGN Receiver](README.md)
-* [Installation](installation-of-snips-ogn-image.md)
-* [Configuration](configure-the-station.md)
-* [Status & Debug](debug.md)
+* [Installation](02-installation.md)
+* [Configuration](configure.md)
+* [Status & Debug](status-debug.md)
 
 ## Expert
 

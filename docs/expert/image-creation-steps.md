@@ -87,12 +87,12 @@ update-rc.d rtlsdr-ogn defaults
 
 ### Manage OGN-receiver.conf at boot time
 
-* [x]  Generate `rtlogn-sdr` config from `OGN-receiver.conf`
-* [x]  If exist use `/boot/rtlsdr-ogn.conf` at boot
-* [x]  Disable pi user password login \(only ssh key login\)
-* [x]  Change pi user password & allow password login
-* [x]  Option to run a specific command at each boot
-* [x]  Manage `rtlsdr-ogn` auto upgrade =&gt; Download at each `rtlsdr-ogn` startup.
+* [x] Generate `rtlogn-sdr` config from `OGN-receiver.conf`
+* [x] If exist use `/boot/rtlsdr-ogn.conf` at boot
+* [x] Disable pi user password login \(only ssh key login\)
+* [x] Change pi user password & allow password login
+* [x] Option to run a specific command at each boot
+* [x] Manage `rtlsdr-ogn` auto upgrade =&gt; Download at each `rtlsdr-ogn` startup.
 
 ```text
 wget https://raw.githubusercontent.com/snip/OGN-receiver-RPI-image/master/dist/OGN-receiver.conf -O /boot/OGN-receiver.conf 
@@ -222,15 +222,11 @@ apt-get clean
 reboot
 ```
 
-
-
 ## 🎉 Congratulations! 🎉
 
 Now you have a working OGN receiver!
 
-You can now [configure it ](../configure-the-station.md)and verify if it's [working correctly](../debug.md).
-
-### 
+You can now [configure it ](../configure.md)and verify if it's [working correctly](../status-debug.md).
 
 ## \[Optional\] Creation of distributable image
 
@@ -252,7 +248,7 @@ rm - some-bash-history
 
 #### Fill not used space with 0 \(allow better compression\)
 
- This allow better compression. can be done at next step by mounting loopback FS**.**
+This allow better compression. can be done at next step by mounting loopback FS**.**
 
 ```bash
 dd if=/dev/zero of=file-filling-disk-with-0 bs=1M 
