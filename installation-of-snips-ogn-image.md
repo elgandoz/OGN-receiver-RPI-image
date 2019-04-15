@@ -2,7 +2,7 @@
 description: Insert the steps here to flash the image with balenaEtcher
 ---
 
-# Installation of Snip's OGN image
+# Installation
 
 ## Getting Super Powers
 

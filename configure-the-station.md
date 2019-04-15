@@ -1,2 +1,26 @@
-# Configure the station
+---
+description: Examples on how to the OGN-receiver.conf
+---
+
+# Configuration
+
+```bash
+### Mandatory ###
+ReceiverName="" # Please follow naming convention (http://wiki.glidernet.org/receiver-naming-convention)
+Latitude=""
+Longitude=""
+
+
+### Optional ###
+EnableCoreOGNTeamRemoteAdmin="true"
+# piUserPassword="raspberry" # By default pi user login by password is disabled
+# runAtBoot="" # Allow a specific script to be run at boot time
+# FreqCorr=""
+# GSMCenterFreq=""
+# GSMGain=""
+# Altitude=""
+# wifiName=""
+# wifiPassword=""
+# wifiCountry="FR"
+```
 

@@ -2,26 +2,11 @@
 description: Create an image from scratch for a Raspberry Pi
 ---
 
-# Image Creation Steps \[Expert\]
+# Image creation steps
 
 ## Setup the OGN receiver
 
-Becoming a super hero is a fairly straight forward process:
-
-```bash
-$ give me super-powers
-```
-
-{% hint style="info" %}
- Super-powers are granted randomly so please submit an issue if you're not happy with yours.
-{% endhint %}
-
-Once you're strong enough, save the world:
-
-```bash
-# Ain't no code for that yet, sorry
-echo 'You got to trust me on this, I saved the world'
-```
+Description of what is going to happen
 
 ### Get latest Raspbian Stretch Lite image and write it to SD card
 
@@ -243,7 +228,7 @@ reboot
 
 Now you have a working OGN receiver!
 
-You can now [configure it ](configure-the-station.md)and verify if it's [working correctly](debug.md).
+You can now [configure it ](../configure-the-station.md)and verify if it's [working correctly](../debug.md).
 
 ### 
 
@@ -276,10 +261,17 @@ rm file-filling-disk-with-0
 
 #### Create the image
 
-Read image from another Linux, then:
+Read image from another OSX/Linux
 
 ```bash
+# instruction on hw to get an .img
+```
+
+Then, from another OSX/Linux machine:
+
+```bash
+wget https://raw.githubusercontent.com/snip/OGN-receiver-RPI-image/master/shrink-ogn-rpi
 shrink-ogn-rpi 2019-04-08-raspbian-stretch-lite-ognro.img
-zip -9 2018-03-13-raspbian-stretch-lite-ognro.zip 2018-03-13-raspbian-stretch-lite-ognro.img
+zip -9 2019-04-08-raspbian-stretch-lite-ognro.zip 2019-04-08-raspbian-stretch-lite-ognro.img
 ```
 

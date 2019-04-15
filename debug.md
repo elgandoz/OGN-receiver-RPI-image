@@ -4,9 +4,9 @@ description: >-
   receiver
 ---
 
-# Debug
+# Status & Debug
 
-This page make the assumption you use the Snip's RPi OGN image or followed his Image creation steps.
+This page make the assumption you use the Sebastien's RPi OGN image or followed his [image creation steps](expert/image-creation-steps.md).
 
 ## Getting receiver status
 
