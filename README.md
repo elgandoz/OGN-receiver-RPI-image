@@ -7,3 +7,6 @@ Main target usage was for French Federation \(FFVV\) who invested in batches of 
 ### Download
 
 Latest usable image is available here: [http://download.glidernet.org/seb-ogn-rpi-image](http://download.glidernet.org/seb-ogn-rpi-image)
+
+### Guide
+https://glidernet.gitbook.io/ogn-rpi-guide/
