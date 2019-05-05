@@ -38,6 +38,45 @@ Linux wayof touch
 {% endtab %}
 {% endtabs %}
 
+### Enable WIFI Connection
+
+{% tabs %}
+{% tab title="MacOS" %}
+```bash
+nano /Volumes/boot/wpa_supplicant.conf
+```
+{% endtab %}
+
+{% tab title="Windows" %}
+```bash
+
+```
+{% endtab %}
+
+{% tab title="Linux" %}
+```bash
+
+```
+{% endtab %}
+{% endtabs %}
+
+and then insert this information \(adapt it to your network\)
+
+{% code-tabs %}
+{% code-tabs-item title="wpa\_supplicant.conf" %}
+```text
+country=AU
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+
+network={
+    ssid="NETWORK-NAME"
+    psk="NETWORK-PASSWORD"
+}
+```
+{% endcode-tabs-item %}
+{% endcode-tabs %}
+
 ### Became super user
 
 ```bash
