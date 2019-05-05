@@ -1,9 +1,12 @@
 # Table of contents
 
-* [OGN Receiver](README.md)
-* [Installation](02-installation.md)
-* [Configuration](configure.md)
-* [Status & Debug](status-debug.md)
+* [RPi OGN Receiver](README.md)
+
+## Ready image
+
+* [Installation](ready-image/02-installation.md)
+* [Configuration](ready-image/configure.md)
+* [Status & Debug](ready-image/status-debug.md)
 
 ## Expert
 

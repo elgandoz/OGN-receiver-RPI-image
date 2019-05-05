@@ -1,5 +1,7 @@
 ---
-description: Create an image from scratch for a Raspberry Pi
+description: >-
+  Process to create a Raspberry Pi SD image for OGN receiver, starting from
+  scratch.
 ---
 
 # Image creation steps
@@ -18,17 +20,21 @@ Put a file named ssh in /boot \([https://www.raspberrypi.org/documentation/remot
 
 {% tabs %}
 {% tab title="MacOS" %}
-```text
+```bash
 touch ~/ssh
 ```
 {% endtab %}
 
 {% tab title="Windows" %}
-
+```bash
+some windows stuff
+```
 {% endtab %}
 
 {% tab title="Linux" %}
-
+```bash
+Linux wayof touch
+```
 {% endtab %}
 {% endtabs %}
 
@@ -52,10 +58,14 @@ apt-get dist-upgrade
 rpi-update
 ```
 
-### Update RPi configuration
+### Run RPi configuration
 
-1. Update hostname to `ogn-receiver` thanks to `raspi-config` 
-2. Set up locale \(More instruction here\)
+Run the Raspberry Pi configuration tool typing `raspi-config`:
+
+1. Update hostname to `ogn-receiver` 
+2. Set up language locale, if needed 
+   1. \(en\_au.UTF-8\)
+   2. timezone
 
 ### Install standard OGN lib & softs + standard config
 
@@ -140,7 +150,7 @@ crontab -l | { cat; echo "0 5 * * * /sbin/reboot"; } | crontab -
 
 ### TODO: how to get local time?
 
-Maybe with [https://ipsidekick.com/json](https://ipsidekick.com/json) or [https://ipapi.co/timezone/](https://ipapi.co/timezone/) ? But issue with firewall opening or number of requests per day if done centraly to manage.
+Maybe with [https://ipsidekick.com/json](https://ipsidekick.com/json) or [https://ipapi.co/timezone/](https://ipapi.co/timezone/) ? But issue with firewall opening or number of requests per day if done centrally to manage.
 
 ### Manage firstboot ? =&gt; Do we realy need it?
 
@@ -154,12 +164,16 @@ raspi-config --expand-rootfs
 
 ### Add watchdog
 
+ ****The watchdog [will restart the Pi if it hangs/kernel panics](https://www.raspberrypi.org/forums/viewtopic.php?f=29&t=147501&start=25#p1254069%20)
+
 ```bash
 echo "RuntimeWatchdogSec=10s" >> /etc/systemd/system.conf
 echo "ShutdownWatchdogSec=4min" >> /etc/systemd/system.conf
 ```
 
-See: [https://www.raspberrypi.org/forums/viewtopic.php?f=29&t=147501&start=25\#p1254069](https://www.raspberrypi.org/forums/viewtopic.php?f=29&t=147501&start=25#p1254069) And to check if it working well, to generate a kernel panic: `echo c > /proc/sysrq-trigger`
+{% hint style="warning" %}
+**\[optional\]** To check if it's working,  you can generate a kernel panic: `echo c > /proc/sysrq-trigger`
+{% endhint %}
 
 ### Disable swap
 
@@ -169,13 +183,13 @@ systemctl disable dphys-swapfile
 apt-get purge dphys-swapfile
 ```
 
-### Disable fake-hwclock?
+### Disable fake-hwclock
+
+As it is going to be a read only file system, we won't rely on `/etc/fake-hwclock.data`
 
 ```bash
 update-rc.d fake-hwclock disable
 ```
-
-As we are going to be RO file system we will not rely on `/etc/fake-hwclock.data`.
 
 ### Force time sync every 10 minutes?
 
@@ -183,7 +197,9 @@ As we are going to be RO file system we will not rely on `/etc/fake-hwclock.data
 crontab -l | { cat; echo "*/10 * * * * ( /usr/sbin/ntpdate -u pool.ntp.org ) > /tmp/ntp-sync.log 2>&1"; } | crontab -
 ```
 
-### Add RO FS
+### Add ReadOnly FileSystem \(RO FS\)
+
+This step will prevent the user to make permanent changes, and it will also [prevent SD card corruption](http://wiki.glidernet.org/wiki:prevent-sd-card-corruption)
 
 ```bash
 cd /sbin
@@ -202,8 +218,6 @@ echo "To manage it (as root): overlayctl disable | overlayctl enable | overlayct
 echo "----------------------"
 EOF
 ```
-
-\(from: [http://wiki.glidernet.org/wiki:prevent-sd-card-corruption](http://wiki.glidernet.org/wiki:prevent-sd-card-corruption)\)
 
 ### Cleanup installed image
 
@@ -226,27 +240,29 @@ reboot
 
 Now you have a working OGN receiver!
 
-You can now [configure it ](../configure.md)and verify if it's [working correctly](../status-debug.md).
+You can now [configure it ](../ready-image/configure.md)and verify if it's [working correctly](../ready-image/status-debug.md).
 
 ## \[Optional\] Creation of distributable image
 
-### Read SD image to file & shrink it & compress it
+This section is for who wants to create a distributable SD image to, as the user ready made image
 
 ### Disable overlay and reboot
 
 ```bash
-sudo overlay disable something-something 
+sudo overlayctl disable
 sudo reboot
 ```
 
-#### Remove history
+### Remove history
+
+Login again and:
 
 ```bash
 # Commands to remove history here
-rm - some-bash-history
+sudo rm - some-bash-history
 ```
 
-#### Fill not used space with 0 \(allow better compression\)
+### Fill not used space with 0 \(allow better compression\)
 
 This allow better compression. can be done at next step by mounting loopback FS**.**
 
@@ -255,15 +271,23 @@ dd if=/dev/zero of=file-filling-disk-with-0 bs=1M
 rm file-filling-disk-with-0
 ```
 
-#### Create the image
+### Re-enable RO FS
 
-Read image from another OSX/Linux
+```bash
+sudo overlayctl enable
+```
+
+### Create the image
+
+From another OSX/Linux machine \(**not from the Pi prompt**\):
+
+#### Read image from another OSX/Linux
 
 ```bash
 # instruction on hw to get an .img
 ```
 
-Then, from another OSX/Linux machine:
+#### Shrink the image and compress it
 
 ```bash
 wget https://raw.githubusercontent.com/snip/OGN-receiver-RPI-image/master/shrink-ogn-rpi
