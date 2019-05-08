@@ -1,6 +1,6 @@
 #!/bin/bash
 # Automatic Image file resizer
-# Written by SirLagz and adapted by Marco Gandi for Ubuntu and ARM64 images
+# Written by SirLagz and adapted by Marco Gandi for Ubuntu with ARM64 img
 # Original: http://sirlagz.net/2013/03/10/script-automatic-rpi-image-downsizer/
 strImgFile=$1
 
