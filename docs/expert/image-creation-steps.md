@@ -324,13 +324,16 @@ From another OSX/Linux machine \(**not from the Pi prompt**\):
 
 ```bash
 # instruction on hw to get an .img
+dd something
 ```
 
 #### Shrink the image and compress it
+Install the image shrinking script and use it. Compress the result.
 
 ```bash
-wget https://raw.githubusercontent.com/snip/OGN-receiver-RPI-image/master/shrink-ogn-rpi
-shrink-ogn-rpi 2019-04-08-raspbian-stretch-lite-ognro.img
+wget https://raw.githubusercontent.com/snip/OGN-receiver-RPI-image/master/shrink-ogn-rpi64
+chmod +x shrink-ogn-rpi64
+./shrink-ogn-rpi64 2019-04-08-raspbian-stretch-lite-ognro.img
 zip -9 2019-04-08-raspbian-stretch-lite-ognro.zip 2019-04-08-raspbian-stretch-lite-ognro.img
 ```
-
+!> On different Linux distro if the above doesn't work try shrink-ogn-rpi
