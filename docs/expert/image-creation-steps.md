@@ -38,6 +38,10 @@ Linux wayof touch
 {% endtab %}
 {% endtabs %}
 
+{% hint style="success" %}
+This is handy if you're using a headless setup. Otherwise you can skip this step.
+{% endhint %}
+
 ### Enable WIFI Connection
 
 {% tabs %}
@@ -203,7 +207,7 @@ raspi-config --expand-rootfs
 
 ### Add watchdog
 
- ****The watchdog [will restart the Pi if it hangs/kernel panics](https://www.raspberrypi.org/forums/viewtopic.php?f=29&t=147501&start=25#p1254069%20)
+_\*\*_The watchdog [will restart the Pi if it hangs/kernel panics](https://www.raspberrypi.org/forums/viewtopic.php?f=29&t=147501&start=25#p1254069%20)
 
 ```bash
 echo "RuntimeWatchdogSec=10s" >> /etc/systemd/system.conf
@@ -211,7 +215,7 @@ echo "ShutdownWatchdogSec=4min" >> /etc/systemd/system.conf
 ```
 
 {% hint style="warning" %}
-**\[optional\]** To check if it's working,  you can generate a kernel panic: `echo c > /proc/sysrq-trigger`
+**\[optional\]** To check if it's working, you can generate a kernel panic: `echo c > /proc/sysrq-trigger`
 {% endhint %}
 
 ### Disable swap
@@ -292,14 +296,7 @@ sudo overlayctl disable
 sudo reboot
 ```
 
-### Remove history
-
 Login again and:
-
-```bash
-# Commands to remove history here
-sudo rm - some-bash-history
-```
 
 ### Fill not used space with 0 \(allow better compression\)
 
@@ -316,24 +313,59 @@ rm file-filling-disk-with-0
 sudo overlayctl enable
 ```
 
+### Remove history and shutdown
+
+```bash
+sudo history -c
+history -c
+sudo halt
+```
+
 ### Create the image
 
 From another OSX/Linux machine \(**not from the Pi prompt**\):
 
 #### Read image from another OSX/Linux
 
+{% tabs %}
+{% tab title="MacOS" %}
 ```bash
-# instruction on hw to get an .img
-dd something
+brew install ddrescue
+# Find which drive we're going to copy (driveX)
+diskutil list
+# Replace diskX with your drive
+sudo ddrescue /dev/diskX ~/Desktop/2019-05-07-ogn-image.img 
 ```
 
+Alternatively use **Disk Utility**  from MacOS
+
+{% hint style="warning" %}
+Make sure to select the whole drive and not only the **boot** partition
+{% endhint %}
+{% endtab %}
+
+{% tab title="Linux" %}
+```bash
+# Find which drive we're going to copy (driveX)
+sudo fdisk -l
+# Replace diskX with your drive
+sudo dd if=/dev/diskX of=~/Desktop/2019-05-07-ogn-image.img 
+```
+{% endtab %}
+{% endtabs %}
+
 #### Shrink the image and compress it
+
 Install the image shrinking script and use it. Compress the result.
 
 ```bash
 wget https://raw.githubusercontent.com/snip/OGN-receiver-RPI-image/master/shrink-ogn-rpi64
 chmod +x shrink-ogn-rpi64
-./shrink-ogn-rpi64 2019-04-08-raspbian-stretch-lite-ognro.img
-zip -9 2019-04-08-raspbian-stretch-lite-ognro.zip 2019-04-08-raspbian-stretch-lite-ognro.img
+./shrink-ogn-rpi64 2019-05-07-ogn-image.img
+zip -9 2019-05-07-ogn-image.zip 2019-05-07-ogn-image.img
 ```
-!> On different Linux distro if the above doesn't work try shrink-ogn-rpi
+
+{% hint style="info" %}
+On different Linux distro, if the above doesn't work try shrink-ogn-rpi
+{% endhint %}
+

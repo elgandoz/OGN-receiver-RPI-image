@@ -12,8 +12,9 @@ The following procedure has been tested for:
 
 * [ ] RPi 2
 * [x] RPi 3 A
+* [x] RPi 3 B
 * [x] RPi 3 B+
-* [ ] RPi 3 A+
+* [x] RPi 3 A+
 
 ## Getting started
 
