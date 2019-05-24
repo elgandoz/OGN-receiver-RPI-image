@@ -196,7 +196,7 @@ else
 RF:
 { 
   FreqCorr = $FreqCorr;          # [ppm]      "big" R820T sticks have 40-80ppm correction factors, measure it with gsm_scan
-  FreqPlan = $FreqPlan;          # # 1=Europe/Africa, 2=USA/Canada, 3=Australia/Chile, 4=New Zealand
+  FreqPlan = $FreqPlan;          # 1=Europe/Africa, 2=USA/Canada, 3=Australia/Chile, 4=New Zealand
 
   GSM:                     # for frequency calibration based on GSM signals
   { CenterFreq  = $GSMCenterFreq;   # [MHz] find the best GSM frequency with gsm_scan
