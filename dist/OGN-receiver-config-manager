@@ -1,13 +1,14 @@
 #!/bin/bash
 
 UPDATE_SELF=${UPDATE_SELF:-1}
-UPDATE_URI="https://raw.githubusercontent.com/snip/OGN-receiver-RPI-image/master/dist/OGN-receiver-config-manager"
+UPDATE_URI="https://raw.githubusercontent.com/elgandoz/OGN-receiver-RPI-image/master/dist/OGN-receiver-config-manager"
 OGNBINARYURL="http://download.glidernet.org/rpi-gpu/rtlsdr-ogn-bin-RPI-GPU-latest.tgz"
 GEOIDSEPARURL="http://download.glidernet.org/common/WW15MGH.DAC"
 WORK_PATH="/root"
 
 ### Init some variables to default values
 defaultFreqCorr="60"
+defaultFreqPlan="1"
 GSMCenterFreq="950"
 GSMGain="25"
 Altitude="0"
@@ -154,6 +155,15 @@ else
   fi
 fi
 
+### Allows custom Frequency Plan
+if [ -n "$FreqPlan" ]
+then
+  echo "Using configured Frequency Plan: $FreqPlan"
+else
+  FreqPlan=$defaultFreqPlan
+  echo "Using default Frequency Plan: $FreqPlan"
+fi
+
 ### Generate OGN receiver config file
 if [ -z "$ReceiverName" ]
 then
@@ -186,6 +196,7 @@ else
 RF:
 { 
   FreqCorr = $FreqCorr;          # [ppm]      "big" R820T sticks have 40-80ppm correction factors, measure it with gsm_scan
+  FreqPlan = $FreqPlan;          # # 1=Europe/Africa, 2=USA/Canada, 3=Australia/Chile, 4=New Zealand
 
   GSM:                     # for frequency calibration based on GSM signals
   { CenterFreq  = $GSMCenterFreq;   # [MHz] find the best GSM frequency with gsm_scan
