@@ -45,20 +45,7 @@ You can press`Ctrl+C` to stop the stream and exit to the prompt.
 
 ## Remote Status
 
-* Visit `https://ogn.peanutpod.de/#/receivers/[APRS callsign of you station]`
-
-{% hint style="success" %}
-Using YTEM \(Temora, Australia\) as example: [https://ogn.peanutpod.de/\#/receivers/YTEM](https://ogn.peanutpod.de/#/receivers/YTEM)
-{% endhint %}
+* Visit [`https://ogn.peanutpod.de/`](https://ogn.peanutpod.de/) and lookup your station name
 
 This page will fetch informations from the OGN networks, from the receiver itself and from the [wiki's list of receivers](http://wiki.glidernet.org/list-of-receivers).
-
-{% hint style="info" %}
-Additionally, with the way you can verify the load and the range \(using YTEM again as example\):
-
-* [http://grafana.glidernet.org/d/000000001/receivers?var-receiver=YTEM](http://grafana.glidernet.org/d/000000001/receivers?orgId=1&var-receiver=YTEM)
-* [https://ognrange.onglide.com/\#YTEM](https://ognrange.onglide.com/#YTEM)
-
-These links are also available in the above Status Page
-{% endhint %}
 
